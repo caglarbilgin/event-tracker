@@ -15,7 +15,6 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -59,6 +58,19 @@ public class UserService {
                 .stream()
                 .map(userMapper::toUserDTO)
                 .toList();
+    }
+
+    public UserDTO deleteUser(String email) {
+        User user = getUserIfExist(email);
+        userRepository.delete(user);
+        return userMapper.toUserDTO(user);
+    }
+
+    public UserDTO updateUser(UserDTO userDTO) {
+        User user = getUserIfExist(userDTO.email());
+        userMapper.updateModelFromDTO(userDTO, user);
+        userRepository.save(user);
+        return userDTO;
     }
 
     public AddressDTO createAddress(String email, AddressDTO addressDTO) {
@@ -127,7 +139,6 @@ public class UserService {
         address.setPostCode(addressDTO.postCode());
         address.setCountry(addressDTO.country());
     }
-
 
     private static Address findAddressById(User user, UUID addressUUID) {
         return user.getAddresses().stream()

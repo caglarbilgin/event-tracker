@@ -29,6 +29,16 @@ public class UserController {
         return userService.getAllUser();
     }
 
+    @DeleteMapping
+    public UserDTO deleteUser(@RequestParam String email) {
+        return userService.deleteUser(email);
+    }
+
+    @PatchMapping
+    public UserDTO updateUser(@RequestBody UserDTO userDTO) {
+        return userService.updateUser(userDTO);
+    }
+
     @PostMapping("/address")
     public AddressDTO createAddress(@RequestParam(name = "email") String email,
                                     @Valid @RequestBody AddressDTO address) {
