@@ -2,7 +2,10 @@ package com.event.tracker.eventtracker.exception;
 
 public class CustomException extends RuntimeException {
     public enum ErrorCode {
-        USER_ALREADY_EXIST("User already exists !");
+        USER_ALREADY_EXIST("User already exists !"),
+        USER_NOT_FOUND("User not found !"),
+        MAX_ADDRESS_SIZE("You have exceeded the maximum number of addresses, please delete an address and try again."),
+        ADDRESS_NOT_FOUND("Address not found");
 
         private final String value;
 

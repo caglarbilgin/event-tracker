@@ -3,6 +3,8 @@ package com.event.tracker.eventtracker.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -24,26 +26,19 @@ public class User {
     private String password;
 
     @Column(name = "created_date")
-    private LocalDateTime createdDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdDate;
 
     @Column(name = "phone_number")
     private Long phoneNumber;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Address> addresses;
+
     public User() {
     }
 
-    public User(UUID id, String email, String password, LocalDateTime createdDate, Long phoneNumber, String name, String surname, int age) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        this.createdDate = createdDate;
-        this.phoneNumber = phoneNumber;
-        this.name = name;
-        this.surname = surname;
-        this.age = age;
-    }
-
-    public User(String email, String password, LocalDateTime createdDate, Long phoneNumber, String name, String surname, int age) {
+    public User(String email, String password, Date createdDate, Long phoneNumber, String name, String surname, int age) {
         this.email = email;
         this.password = password;
         this.createdDate = createdDate;
@@ -77,11 +72,11 @@ public class User {
         this.password = password;
     }
 
-    public LocalDateTime getCreatedDate() {
+    public Date getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(LocalDateTime createdDate) {
+    public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
 
@@ -115,5 +110,13 @@ public class User {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public Set<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(Set<Address> addresses) {
+        this.addresses = addresses;
     }
 }
