@@ -1,7 +1,6 @@
 package com.event.tracker.eventtracker.dto;
 
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Size;
 import org.springframework.lang.NonNull;
 

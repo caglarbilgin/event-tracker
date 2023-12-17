@@ -2,6 +2,8 @@ package com.event.tracker.eventtracker.model;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -25,6 +27,9 @@ public class Address {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @OneToMany(mappedBy = "eventAddress", fetch = FetchType.LAZY)
+    private Set<Event> events = new HashSet<>();
 
     public Address() {
     }
@@ -83,5 +88,13 @@ public class Address {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Set<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(Set<Event> events) {
+        this.events = events;
     }
 }

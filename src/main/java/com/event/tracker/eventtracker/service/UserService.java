@@ -90,7 +90,7 @@ public class UserService {
         return addressDTO;
     }
 
-    private User getUserIfExist(String email) {
+    public User getUserIfExist(String email) {
         return userRepository.findUserByEmail(email)
                 .orElseThrow(() -> new CustomException(
                         CustomException.ErrorCode.USER_NOT_FOUND,
