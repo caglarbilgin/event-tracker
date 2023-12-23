@@ -6,7 +6,8 @@ public class CustomException extends RuntimeException {
         USER_NOT_FOUND("User not found !"),
         MAX_ADDRESS_SIZE("You have exceeded the maximum number of addresses, please delete an address and try again."),
         ADDRESS_NOT_FOUND("Address not found"),
-        EVENT_NOT_FOUND("Event not found");
+        EVENT_NOT_FOUND("Event not found"),
+        ALREADY_ATTENDING_ERROR("User is already attending the event.");
 
         private final String value;
 

@@ -60,12 +60,15 @@ public class EventService {
     }
 
     public EventDTO getEventDetails(String eventId) {
-        Event event = eventRepository.findById(UUID.fromString(eventId))
+        Event event = getEventIfExist(eventId);
+        return eventMapper.toEventDTO(event);
+    }
+
+    public Event getEventIfExist(String eventId) {
+        return eventRepository.findById(UUID.fromString(eventId))
                 .orElseThrow(() ->
                         new CustomException(
                                 CustomException.ErrorCode.EVENT_NOT_FOUND,
                                 CustomException.ErrorCode.EVENT_NOT_FOUND.getValue()));
-
-        return eventMapper.toEventDTO(event);
     }
 }
